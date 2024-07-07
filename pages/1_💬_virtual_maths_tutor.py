@@ -7,6 +7,7 @@ from PIL import Image, ImageOps, ImageDraw
 # Streamlit page configuration
 st.set_page_config(page_title="Virtual Marketing Assistant", page_icon=":robot_face:", layout="wide")
 
+st.logo('images/punyani.ai.logo.png', link=None, icon_image=None)
 
 context = {
     "agentId": "Q9OA0BIDVV",

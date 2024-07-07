@@ -5,6 +5,7 @@ st.set_page_config(
     page_icon='💬',
     layout='wide'
 )
+st.logo('images/punyani.ai.logo.png', link=None, icon_image=None)
 
 st.header("Bedrock Agents Use Cases")
 
