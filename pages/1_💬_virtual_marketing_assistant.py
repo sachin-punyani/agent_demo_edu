@@ -27,6 +27,7 @@ def display_chat_history():
     Displays the chat history.
     """
     for message in st.session_state['history']:
+        if message["agent"] == "vma":
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
                 
@@ -72,7 +73,7 @@ if prompt:
         "sessionId": "MYSESSION115",
         "question": prompt
     }
-    st.session_state['history'].append({"role": "user", "content": prompt})
+    st.session_state['history'].append({"agent" : "vma", "role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
     
@@ -99,7 +100,7 @@ if prompt:
 
     # Use trace_data and formatted_response as needed
     st.sidebar.text_area("", value=all_data, height=300)
-    st.session_state['history'].append({"role": "assistant", "content": the_response})
+    st.session_state['history'].append({"agent" : "vma", "role": "assistant", "content": the_response})
     with st.chat_message("assistant"):
         st.markdown(the_response)
     st.session_state['trace_data'] = the_response

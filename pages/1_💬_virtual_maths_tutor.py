@@ -30,15 +30,17 @@ def display_chat_history(col1, col2):
     """
     with col1:
         for message in st.session_state['history']:
-            if message["role"] == "user":
-                with st.chat_message(message["role"]):
-                    st.markdown(message["content"])
+            if message["agent"] == "vma":
+                if message["role"] == "user":
+                    with st.chat_message(message["role"]):
+                        st.markdown(message["content"])
             
     with col2:
         for message in st.session_state['history']:
-            if message["role"] == "assistant":
-                with st.chat_message(message["role"]):
-                    st.markdown(message["content"])
+            if message["agent"] == "vma":
+                if message["role"] == "assistant":
+                    with st.chat_message(message["role"]):
+                        st.markdown(message["content"])
     
        
 # Function to parse and format response
@@ -84,7 +86,7 @@ if prompt:
         "sessionId": "MYSESSION101",
         "question": prompt
     }
-    st.session_state['history'].append({"role": "user", "content": prompt})
+    st.session_state['history'].append({"agent" : "vmt", "role": "user", "content": prompt})
     
     # Display the prompt in chat
     with col1:
@@ -114,7 +116,7 @@ if prompt:
 
     # Use trace_data and formatted_response as needed
     st.sidebar.text_area("", value=all_data, height=300)
-    st.session_state['history'].append({"role": "assistant", "content": the_response})
+    st.session_state['history'].append({"agent" : "vmt", "role": "assistant", "content": the_response})
     
     # Display the response in chat
     with col2:
