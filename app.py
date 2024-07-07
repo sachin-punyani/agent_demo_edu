@@ -102,9 +102,12 @@ if prompt:
   
 
 if end_session_button:
-    st.session_state['history'].append({"role": "user", "content": "Session Ended"})
-    st.session_state['history'].append({"role": "assistant", "content": "Thank your for using AnyCompany Support Agent!"})
-    
+    with st.chat_message("user"):
+        st.markdown("End Session")
+        
+    with st.chat_message("assistant"):
+        st.markdown("Thank your for using AnyCompany Support Agent!")
+        
     event = {
         "sessionId": "MYSESSION115",
         "question": "placeholder to end session",
