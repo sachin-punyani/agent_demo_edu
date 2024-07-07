@@ -9,15 +9,8 @@ import base64
 import io
 import sys
 
-#For this to run on a local machine in VScode, you need to set the AWS_PROFILE environment variable to the name of the profile/credentials you want to use. 
-
-#check for credentials
-#echo $AWS_ACCESS_KEY_ID
-#echo $AWS_SECRET_ACCESS_KEY
-#echo $AWS_SESSION_TOKEN
-
-agentId = "SHKT53XCLU" #INPUT YOUR AGENT ID HERE
-agentAliasId = "ZS6I2EJZXI" # Hits draft alias, set to a specific alias id for a deployed version
+# agentId = "SHKT53XCLU" #INPUT YOUR AGENT ID HERE
+# agentAliasId = "ZS6I2EJZXI" # Hits draft alias, set to a specific alias id for a deployed version
 theRegion = "us-east-1"
 
 os.environ["AWS_REGION"] = theRegion
@@ -157,6 +150,11 @@ def lambda_handler(event, context):
     question = event["question"]
     endSession = False
     
+    # Extract agentId and agentAliasId from the context
+    agentId = context["agentId"]
+    agentAliasId = context["agentAliasId"]
+    
+    
     print(f"Session: {sessionId} asked question: {question}")
     
     try:
@@ -166,7 +164,6 @@ def lambda_handler(event, context):
         endSession = False
     
     url = f'https://bedrock-agent-runtime.{theRegion}.amazonaws.com/agents/{agentId}/agentAliases/{agentAliasId}/sessions/{sessionId}/text'
-
     
     try: 
         response, trace_data = askQuestion(question, url, endSession)

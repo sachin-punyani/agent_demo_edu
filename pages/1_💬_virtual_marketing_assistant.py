@@ -8,6 +8,11 @@ from PIL import Image, ImageOps, ImageDraw
 st.set_page_config(page_title="Virtual Marketing Assistant", page_icon=":robot_face:", layout="wide")
 
 
+context = {
+    "agentId": "SHKT53XCLU",
+    "agentAliasId": "ZS6I2EJZXI"
+}
+
 ####
 # Functions
 ####
@@ -72,7 +77,7 @@ if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
     
-    response = agenthelper.lambda_handler(event, None)
+    response = agenthelper.lambda_handler(event, context)
 
     try:
         # Parse the JSON string
@@ -113,7 +118,7 @@ if end_session_button:
         "question": "placeholder to end session",
         "endSession": True
     }
-    agenthelper.lambda_handler(event, None)
+    agenthelper.lambda_handler(event, context)
     st.session_state['history'] = []
     st.experimental_rerun()
     
