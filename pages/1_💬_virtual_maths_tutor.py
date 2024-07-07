@@ -30,14 +30,14 @@ def display_chat_history(col1, col2):
     """
     with col1:
         for message in st.session_state['history']:
-            if message["agent"] == "vma":
+            if message["agent"] == "vmt":
                 if message["role"] == "user":
                     with st.chat_message(message["role"]):
                         st.markdown(message["content"])
             
     with col2:
         for message in st.session_state['history']:
-            if message["agent"] == "vma":
+            if message["agent"] == "vmt":
                 if message["role"] == "assistant":
                     with st.chat_message(message["role"]):
                         st.markdown(message["content"])
