@@ -111,6 +111,6 @@ if end_session_button:
         "endSession": True
     }
     agenthelper.lambda_handler(event, None)
-    st.session_state['history'].clear()
+    st.session_state['history'] = []
     display_chat_history()
 
