@@ -147,8 +147,5 @@ cython_debug/
 *.swp
 *.tmp
 
-# Image files
-images/
-
 # Original Python files
 *.py.org
