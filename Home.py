@@ -15,6 +15,7 @@ Bedrock Agents is a versatile framework designed to facilitate the development o
 With Bedrock Agents, deploying chatbots and workflows tailored to specific needs is straightforward. Below are examples of use cases that can be explored in this project:
 
 - **Virtual Marketing Assistant**: A chatbot designed to assist with marketing queries and tasks. [Explore](./virtual_marketing_assistant)
+- **Virtual Maths Tutor**: Guides learners in solving questions step by step. It does not solve the question. It gives hints and encouragement to learners. [Explore](./virtual_maths_tutor)
 - **Customer Support Agent**: Provides support by answering common customer questions. [Coming Soon]
 - **Survey Bot**: Collects feedback or data from users through interactive sessions. [Coming Soon]
 - **Event Reminder Bot**: Helps users remember important dates and events. [Coming Soon]
