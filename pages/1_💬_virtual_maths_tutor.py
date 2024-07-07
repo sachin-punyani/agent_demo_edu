@@ -9,8 +9,8 @@ st.set_page_config(page_title="Virtual Marketing Assistant", page_icon=":robot_f
 
 
 context = {
-    "agentId": "SHKT53XCLU",
-    "agentAliasId": "ZS6I2EJZXI"
+    "agentId": "Q9OA0BIDVV",
+    "agentAliasId": "ZD6FMDRHMJ"
 }
 
 ####
@@ -22,14 +22,23 @@ def initialize_session():
 
         
         
-def display_chat_history():
+                
+def display_chat_history(col1, col2):
     """
     Displays the chat history.
     """
-    for message in st.session_state['history']:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-                
+    with col1:
+        for message in st.session_state['history']:
+            if message["role"] == "user":
+                with st.chat_message(message["role"]):
+                    st.markdown(message["content"])
+            
+    with col2:
+        for message in st.session_state['history']:
+            if message["role"] == "assistant":
+                with st.chat_message(message["role"]):
+                    st.markdown(message["content"])
+    
        
 # Function to parse and format response
 def format_response(response_body):
@@ -55,11 +64,13 @@ initialize_session()
 
 ###### Create Layout
 # Title
-st.title("Virtual Marketing Assistant")
+st.title("Virtual Maths Tutor")
 st.markdown('Powered by Bedrock')
 # Display a button to end the session
 end_session_button = st.button("End Session")
-display_chat_history()
+
+col1, col2 = st.columns(2)
+display_chat_history(col1, col2)
 prompt = st.chat_input("What's up?")
 
 # Sidebar for user input
@@ -69,13 +80,16 @@ st.sidebar.title("Trace Data")
 # Handling user input and responses
 if prompt:
     event = {
-        "sessionId": "MYSESSION115",
+        "sessionId": "MYSESSION101",
         "question": prompt
     }
     st.session_state['history'].append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
     
+    # Display the prompt in chat
+    with col1:
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        
     response = agenthelper.lambda_handler(event, context)
 
     try:
@@ -100,8 +114,12 @@ if prompt:
     # Use trace_data and formatted_response as needed
     st.sidebar.text_area("", value=all_data, height=300)
     st.session_state['history'].append({"role": "assistant", "content": the_response})
-    with st.chat_message("assistant"):
-        st.markdown(the_response)
+    
+    # Display the response in chat
+    with col2:
+        with st.chat_message("assistant"):
+            st.markdown(the_response)
+            
     st.session_state['trace_data'] = the_response
   
 
@@ -110,7 +128,7 @@ if end_session_button:
         st.markdown("End Session")
         
     with st.chat_message("assistant"):
-        st.markdown("Thank your for using Virtual Marketing Assistant!")
+        st.markdown("Thank your for using Virtual Maths Tutor!")
         
     event = {
         "sessionId": "MYSESSION115",
