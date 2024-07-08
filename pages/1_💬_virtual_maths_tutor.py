@@ -21,9 +21,6 @@ def initialize_session():
     if 'history' not in st.session_state:
         st.session_state['history'] = []
 
-        
-        
-                
 def display_chat_history(col1, col2):
     """
     Displays the chat history.

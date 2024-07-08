@@ -62,6 +62,20 @@ st.markdown('Powered by Bedrock')
 end_session_button = st.button("End Session")
 display_chat_history()
 prompt = st.chat_input("What's up?")
+with st.sidebar:
+    st.markdown("# Few Sample Prompts")
+    st.markdown("show leads information")
+    st.markdown("how many of them are from south india")
+    st.markdown("show lead score")
+    st.markdown("show lead score of leads from south india")
+    st.markdown("show lead score with reason")
+    st.markdown("show lead score in descending order of lead score")
+    st.markdown("recommend offers for them")
+    st.markdown("show leads from south india")
+    st.markdown("show leads with email")
+    st.markdown("send personalized email to leads with low lead score")
+    
+
 
 # Sidebar for user input
 st.sidebar.title("Trace Data")
