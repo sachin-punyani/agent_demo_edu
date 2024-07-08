@@ -71,7 +71,6 @@ with st.sidebar:
     st.markdown("show lead score with reason")
     st.markdown("show lead score in descending order of lead score")
     st.markdown("recommend offers for them")
-    st.markdown("show leads from south india")
     st.markdown("show leads with email")
     st.markdown("send personalized email to leads with low lead score")
     
