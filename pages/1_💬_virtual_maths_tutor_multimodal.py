@@ -6,11 +6,12 @@ from PIL import Image, ImageOps, ImageDraw
 
 # Streamlit page configuration
 st.set_page_config(page_title="Virtual Marketing Assistant", page_icon=":robot_face:", layout="wide")
+
 st.logo('images/punyani.ai.logo.png', link=None, icon_image=None)
 
 context = {
-    "agentId": "SHKT53XCLU",
-    "agentAliasId": "ZS6I2EJZXI"
+    "agentId": "Q9OA0BIDVV",
+    "agentAliasId": "ZD6FMDRHMJ"
 }
 
 ####
@@ -20,17 +21,24 @@ def initialize_session():
     if 'history' not in st.session_state:
         st.session_state['history'] = []
 
-        
-        
-def display_chat_history():
+def display_chat_history(col1, col2):
     """
     Displays the chat history.
     """
-    for message in st.session_state['history']:
-        if message["agent"] == "vma":
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-                
+    with col1:
+        for message in st.session_state['history']:
+            if message["agent"] == "vmt":
+                if message["role"] == "user":
+                    with st.chat_message(message["role"]):
+                        st.markdown(message["content"])
+            
+    with col2:
+        for message in st.session_state['history']:
+            if message["agent"] == "vmt":
+                if message["role"] == "assistant":
+                    with st.chat_message(message["role"]):
+                        st.markdown(message["content"])
+    
        
 # Function to parse and format response
 def format_response(response_body):
@@ -56,25 +64,19 @@ initialize_session()
 
 ###### Create Layout
 # Title
-st.title("Virtual Marketing Assistant")
-st.markdown('Powered by Bedrock')
-# Display a button to end the session
-end_session_button = st.button("End Session")
-display_chat_history()
-prompt = st.chat_input("What's up?")
-with st.sidebar:
-    st.markdown("# Few Sample Prompts")
-    st.markdown("show leads information")
-    st.markdown("how many of them are from south india")
-    st.markdown("show lead score")
-    st.markdown("show lead score of leads from south india")
-    st.markdown("show lead score with reason")
-    st.markdown("show lead score in descending order of lead score")
-    st.markdown("recommend offers for them")
-    st.markdown("show leads with email")
-    st.markdown("send personalized email to leads with low lead score")
+topcol1, topcol2 = st.columns([2,0.5])
+with topcol1:
+    st.title("Virtual Maths Tutor")
+    st.markdown('Powered by Bedrock')
     
+with topcol2:
+    end_session_button = st.button("End Session")
 
+uploaded_file = st.file_uploader("", type=["JPG", "JPEG", "PNG"])
+
+col1, col2 = st.columns(2)
+display_chat_history(col1, col2)
+prompt = st.chat_input("What's up?")
 
 # Sidebar for user input
 st.sidebar.title("Trace Data")
@@ -83,13 +85,16 @@ st.sidebar.title("Trace Data")
 # Handling user input and responses
 if prompt:
     event = {
-        "sessionId": "MYSESSION111",
+        "sessionId": "MYSESSION101",
         "question": prompt
     }
-    st.session_state['history'].append({"agent" : "vma", "role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    st.session_state['history'].append({"agent" : "vmt", "role": "user", "content": prompt})
     
+    # Display the prompt in chat
+    with col1:
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        
     response = agenthelper.lambda_handler(event, context)
 
     try:
@@ -113,9 +118,13 @@ if prompt:
 
     # Use trace_data and formatted_response as needed
     st.sidebar.text_area("", value=all_data, height=300)
-    st.session_state['history'].append({"agent" : "vma", "role": "assistant", "content": the_response})
-    with st.chat_message("assistant"):
-        st.markdown(the_response)
+    st.session_state['history'].append({"agent" : "vmt", "role": "assistant", "content": the_response})
+    
+    # Display the response in chat
+    with col2:
+        with st.chat_message("assistant"):
+            st.markdown(the_response)
+            
     st.session_state['trace_data'] = the_response
   
 
@@ -124,7 +133,7 @@ if end_session_button:
         st.markdown("End Session")
         
     with st.chat_message("assistant"):
-        st.markdown("Thank your for using Virtual Marketing Assistant!")
+        st.markdown("Thank your for using Virtual Maths Tutor!")
         
     event = {
         "sessionId": "MYSESSION115",
