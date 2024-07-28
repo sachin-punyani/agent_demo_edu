@@ -41,10 +41,6 @@ If you would like to contribute to this project, please follow these guidelines:
 2. Make your changes and ensure that the code passes all tests.
 3. Submit a pull request with a clear description of your changes.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Support
 
 If you have any questions, issues, or suggestions regarding this project, please contact the project maintainer 
