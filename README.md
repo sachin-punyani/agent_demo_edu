@@ -47,4 +47,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Support
 
-If you have any questions, issues, or suggestions regarding this project, please contact the project maintainer at [sachin.punyani@gmail.com](mailto:sachin.punyani@gmail.com).
+If you have any questions, issues, or suggestions regarding this project, please contact the project maintainer 
